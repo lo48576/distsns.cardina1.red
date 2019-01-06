@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+compile '/index.html' do
+  layout '/default.*'
+  write '/index.html'
+end
+
+compile '/**/*.html' do
+  format = -> target {
+    -> f { f === target || f.include?(target) }
+  }
+  case @item[:format]
+  when format('html') then
+    # Do nothing specially.
+  else
+    raise RuntimeError.new("Unknown article format: #{@item[:format]}")
+  end
+
+  layout '/default.*'
+  write item.identifier.without_ext + '/index.html'
+end
+
+compile '/**/*' do
+  write item.identifier.to_s
+end
+
+layout '/**/*', :erb, trim_mode: '-'
