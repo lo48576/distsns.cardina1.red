@@ -5,13 +5,15 @@ compile '/index.html' do
   write '/index.html'
 end
 
-compile '/**/*.html' do
+compile '/**/*.{html,xml}' do
   format = -> target {
     -> f { f === target || f.include?(target) }
   }
   case @item[:format]
   when format('html') then
     # Do nothing specially.
+  when format('docbook') then
+    layout '/xsl/docbook-article.xsl'
   else
     raise RuntimeError.new("Unknown article format: #{@item[:format]}")
   end
@@ -23,5 +25,7 @@ end
 compile '/**/*' do
   write item.identifier.to_s
 end
+
+layout '/xsl/**/*.xsl', :lo48576_xsl
 
 layout '/**/*', :erb, trim_mode: '-'

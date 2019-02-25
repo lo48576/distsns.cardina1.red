@@ -33,6 +33,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    mini_portile2 (2.4.0)
     nanoc (4.11.2)
       addressable (~> 2.5)
       cri (~> 2.15)
@@ -47,6 +48,8 @@ GEM
       hamster (~> 3.0)
       json_schema (~> 0.19)
       zeitwerk (~> 1.0)
+    nokogiri (1.10.1)
+      mini_portile2 (~> 2.4.0)
     parallel (1.13.0)
     public_suffix (3.0.3)
     rack (2.0.6)
@@ -67,6 +70,7 @@ PLATFORMS
 DEPENDENCIES
   adsf-live
   nanoc (~> 4)
+  nokogiri (~> 1)
 
 BUNDLED WITH
    1.17.3
