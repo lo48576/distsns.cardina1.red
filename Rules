@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
+# Copied from <https://github.com/nanoc/nanoc/blob/70b5726576c79f2eaf0c258c225fe8948dbe324a/lib/nanoc/filters/relativize_paths.rb>.
+XHTML_RELPATH_SELECTORS = ['*/@href', '*/@src', 'object/@data', 'param[@name="movie"]/@content', 'form/@action', 'comment()'].freeze
+
 compile '/index.html' do
   layout '/default.*'
+  filter :relativize_paths, type: :xml, select: XHTML_RELPATH_SELECTORS
   write '/index.html'
 end
 
@@ -19,6 +23,7 @@ compile '/**/*.{html,xml}' do
   end
 
   layout '/default.*'
+  filter :relativize_paths, type: :xml, select: XHTML_RELPATH_SELECTORS
   write item.identifier.without_ext + '/index.html'
 end
 
