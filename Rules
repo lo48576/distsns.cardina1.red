@@ -3,7 +3,19 @@
 # Copied from <https://github.com/nanoc/nanoc/blob/70b5726576c79f2eaf0c258c225fe8948dbe324a/lib/nanoc/filters/relativize_paths.rb>.
 XHTML_RELPATH_SELECTORS = ['*/@href', '*/@src', 'object/@data', 'param[@name="movie"]/@content', 'form/@action', 'comment()'].freeze
 
-compile '/index.html' do
+compile '/index.{html,xml}' do
+  format = -> target {
+    -> f { f === target || f.include?(target) }
+  }
+  case @item[:format]
+  when format('html') then
+    # Do nothing specially.
+  when format('docbook') then
+    layout '/xsl/docbook-article.xsl'
+  else
+    raise RuntimeError.new("Unknown article format: #{@item[:format]}")
+  end
+
   layout '/default.*'
   filter :relativize_paths, type: :xml, select: XHTML_RELPATH_SELECTORS
   write '/index.html'
