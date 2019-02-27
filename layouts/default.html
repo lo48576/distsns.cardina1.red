@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+	<meta charset="utf-8" />
+	<title><%= @item[:title] %> - <%= h @config[:site_title] %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="canonical" href="<%= @config[:base_url] + @item.path %>" />
+	<%- if excerpt = @item[:excerpt] %><meta name="description" content="<%= excerpt %>" /><% end -%>
+	<link rel="stylesheet" href="/assets/purecss-1.0.0/base-min.css" />
+	<link rel="stylesheet" href="/assets/purecss-1.0.0/grids-min.css" />
+	<link rel="stylesheet" href="/assets/purecss-1.0.0/grids-responsive-min.css" />
+	<link rel="stylesheet" href="/assets/purecss-1.0.0/tables-min.css" />
+	<meta name="generator" content="Nanoc <%= Nanoc::VERSION %>" />
+</head>
+<body>
+	<main>
+		<div class="size-container">
+			<%= yield -%>
+		</div>
+	</main>
+	<footer>
+		<div class="size-container">
+			<!-- -->
+		</div>
+	</footer>
+</body>
+</html>
+<%-# vim: set ft=eruby : -%>

@@ -1,0 +1,21 @@
+# A list of file extensions that Nanoc will consider to be textual rather than
+# binary. If an item with an extension not in this list is found,  the file
+# will be considered as binary.
+text_extensions: [ 'adoc', 'asciidoc', 'atom', 'coffee', 'css', 'erb', 'haml', 'handlebars', 'hb', 'htm', 'html', 'js', 'less', 'markdown', 'md', 'ms', 'mustache', 'php', 'rb', 'rdoc', 'sass', 'scss', 'slim', 'tex', 'txt', 'xhtml', 'xml', 'xsl' ]
+
+prune:
+  auto_prune: true
+
+data_sources:
+  - type: filesystem
+    encoding: utf-8
+
+base_url: 'https://distsns.cardina1.red'
+site_title: '分散SNSのあれこれ'
+
+# For @lo48576.
+deploy:
+  default:
+    kind: rsync
+    dst: "www@distsns.cardina1.red:"
+    options: [ "-av", "--checksum", "--delete-after", "-e", "ssh" ]
