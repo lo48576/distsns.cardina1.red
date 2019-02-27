@@ -12,3 +12,10 @@ data_sources:
 
 base_url: 'https://distsns.cardina1.red'
 site_title: '分散SNSのあれこれ'
+
+# For @lo48576.
+deploy:
+  default:
+    kind: rsync
+    dst: "www@distsns.cardina1.red:"
+    options: [ "-av", "--checksum", "--delete-after", "-e", "ssh" ]
