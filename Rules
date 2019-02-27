@@ -16,6 +16,7 @@ compile '/index.{html,xml}' do
     raise RuntimeError.new("Unknown article format: #{@item[:format]}")
   end
 
+  filter :colorize_syntax, default_colorizer: :pygmentsrb, syntax: :xml
   layout '/default.*'
   filter :relativize_paths, type: :xml, select: XHTML_RELPATH_SELECTORS
   write '/index.html'
@@ -34,6 +35,7 @@ compile '/**/*.{html,xml}' do
     raise RuntimeError.new("Unknown article format: #{@item[:format]}")
   end
 
+  filter :colorize_syntax, default_colorizer: :pygmentsrb, syntax: :xml
   layout '/default.*'
   filter :relativize_paths, type: :xml, select: XHTML_RELPATH_SELECTORS
   write item.identifier.without_ext + '/index.html'
